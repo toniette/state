@@ -1,13 +1,11 @@
 <?php
 
-namespace Toniette\Support;
+namespace Toniette\StateMachine;
 
 use InvalidArgumentException;
 use ReflectionClass;
 use ReflectionException;
 use ReflectionProperty;
-use Toniette\Support\Interface\State;
-use Toniette\Support\Trait\Stateful;
 
 final class StatefulFactory
 {

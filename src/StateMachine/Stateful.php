@@ -1,12 +1,11 @@
 <?php
 
-namespace Toniette\Support\Trait;
+namespace Toniette\StateMachine;
 
 use BadMethodCallException;
 use Exception;
 use ReflectionClass;
 use ReflectionProperty;
-use Toniette\Support\Interface\State;
 
 trait Stateful
 {

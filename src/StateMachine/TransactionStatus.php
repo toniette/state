@@ -1,10 +1,6 @@
 <?php
 
-namespace Toniette\Status;
-
-use Toniette\Support\Interface\State;
-use Toniette\Support\Transition;
-use Toniette\Support\TransitionCollection;
+namespace Toniette\StateMachine;
 
 /**
  * @method sendToAnalysis()

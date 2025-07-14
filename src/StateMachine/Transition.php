@@ -1,8 +1,6 @@
 <?php
 
-namespace Toniette\Support;
-
-use Toniette\Support\Interface\State;
+namespace Toniette\StateMachine;
 
 final class Transition
 {

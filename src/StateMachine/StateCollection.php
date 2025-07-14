@@ -1,8 +1,8 @@
 <?php
 
-namespace Toniette\Support;
+namespace Toniette\StateMachine;
 
-use Toniette\Support\Interface\State;
+use Toniette\Collection;
 
 class StateCollection extends Collection
 {

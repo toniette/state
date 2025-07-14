@@ -1,7 +1,7 @@
 <?php
 
-use Toniette\Support\StatefulFactory;
-use Toniette\Transaction;
+use Toniette\StateMachine\StatefulFactory;
+use Toniette\StateMachine\Transaction;
 
 require __DIR__ . '/vendor/autoload.php';
 

@@ -1,8 +1,6 @@
 <?php
 
-namespace Toniette\Support\Interface;
-
-use Toniette\Support\TransitionCollection;
+namespace Toniette\StateMachine;
 
 interface State
 {

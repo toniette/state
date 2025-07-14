@@ -1,6 +1,8 @@
 <?php
 
-namespace Toniette\Support;
+namespace Toniette\StateMachine;
+
+use Toniette\Collection;
 
 class TransitionCollection extends Collection
 {

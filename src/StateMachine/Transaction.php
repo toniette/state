@@ -1,9 +1,6 @@
 <?php
 
-namespace Toniette;
-
-use Toniette\Status\TransactionStatus;
-use Toniette\Support\Trait\Stateful;
+namespace Toniette\StateMachine;
 
 class Transaction
 {

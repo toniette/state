@@ -1,6 +1,6 @@
 <?php
 
-namespace Toniette\Support;
+namespace Toniette;
 
 use InvalidArgumentException;
 use ReflectionClass;
@@ -10,8 +10,7 @@ use SplObjectStorage;
 abstract class Collection extends SplObjectStorage
 {
     protected ?string $type;
-
-    public static string $namespace;
+    protected static string $namespace = __NAMESPACE__;
 
     /**
      * @throws ReflectionException
@@ -54,12 +53,16 @@ abstract class Collection extends SplObjectStorage
      */
     private function guessType(): void
     {
-        $className = $this->getEntityName();
-        if (!class_exists($className)) {
-            throw new InvalidArgumentException("Class $className does not exist");
+        if (empty(static::$namespace)) {
+            throw new InvalidArgumentException("Namespace is not set for " . static::class);
         }
 
-        $this->type = $className;
+        $fullQualifiedClassName = static::$namespace . '\\' . $this->getEntityName();
+        if (!class_exists($fullQualifiedClassName)) {
+            throw new InvalidArgumentException("Class $fullQualifiedClassName does not exist");
+        }
+
+        $this->type = $fullQualifiedClassName;
     }
 
     public function attach(object $object, mixed $info = null): void
@@ -92,6 +95,9 @@ abstract class Collection extends SplObjectStorage
         }
     }
 
+    /**
+     * @throws ReflectionException
+     */
     public static function from(object ...$objects): static
     {
         return new static(...$objects);
