@@ -1,6 +1,6 @@
 <?php
 
-namespace Toniette\Interceptor\Interface;
+namespace Toniette\Proxy\Interface;
 
 interface Interceptor
 {

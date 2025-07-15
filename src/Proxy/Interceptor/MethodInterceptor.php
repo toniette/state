@@ -1,12 +1,12 @@
 <?php
 
-namespace Toniette\Interceptor;
+namespace Toniette\Proxy\Interceptor;
 
 use Attribute;
-use Toniette\Interceptor\Interface\Interceptor;
+use Toniette\Proxy\Interface\Interceptor;
 
-#[Attribute(Attribute::TARGET_CLASS)]
-class ClassInterceptor implements Interceptor
+#[Attribute(Attribute::TARGET_METHOD)]
+class MethodInterceptor implements Interceptor
 {
     public function before(): void
     {

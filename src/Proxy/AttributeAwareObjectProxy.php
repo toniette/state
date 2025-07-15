@@ -1,14 +1,14 @@
 <?php
 
-namespace Toniette\Interceptor;
+namespace Toniette\Proxy;
 
 use ReflectionAttribute;
 use ReflectionClass;
 use ReflectionException;
-use Toniette\Interceptor\Interface\Accessor;
-use Toniette\Interceptor\Interface\Decorator;
-use Toniette\Interceptor\Interface\Interceptor;
-use Toniette\Interceptor\Interface\Mutator;
+use Toniette\Proxy\Interface\Accessor;
+use Toniette\Proxy\Interface\Decorator;
+use Toniette\Proxy\Interface\Interceptor;
+use Toniette\Proxy\Interface\Mutator;
 
 class AttributeAwareObjectProxy
 {
