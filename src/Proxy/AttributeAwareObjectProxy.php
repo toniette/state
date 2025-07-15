@@ -24,7 +24,6 @@ class AttributeAwareObjectProxy
      * @param class-string<T>|T $target
      * @param mixed ...$params
      * @return AttributeAwareObjectProxy&T
-     * @throws ReflectionException
      */
     public static function of(object|string $target, mixed ...$params): self
     {
@@ -115,6 +114,7 @@ class AttributeAwareObjectProxy
     }
 
     // accessors
+
     private static function getAccessors(ReflectionAttribute ...$attributes): array
     {
         return array_filter(
