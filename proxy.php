@@ -14,6 +14,11 @@ require __DIR__ . '/vendor/autoload.php';
 #[ClassInterceptor]
 #[ClassDecorator]
 class Subject {
+    public function __construct()
+    {
+        echo "Subject class instantiated" . PHP_EOL;
+    }
+
     #[PropertyInterceptor]
     #[PropertyAccessor]
     #[PropertyMutator]
@@ -30,16 +35,15 @@ class Subject {
 
     #[MethodInterceptor]
     #[MethodDecorator]
-    public function method()
+    public function method(): string
     {
         return "Method called";
     }
 
-//    #[MethodInterceptor]
-//    public static function staticMethod() //
-//    {
-//        echo "Static method called" . PHP_EOL;
-//    }
+    public static function staticMethod(): string
+    {
+        return "Static method called" . PHP_EOL;
+    }
 }
 
 $proxy = AttributeAwareObjectProxy::of(Subject::class);

@@ -13,6 +13,7 @@ use Toniette\Proxy\Interface\Mutator;
 class AttributeAwareObjectProxy
 {
     private ReflectionClass $reflection;
+
     private function __construct(
         private readonly object $target
     ) {
