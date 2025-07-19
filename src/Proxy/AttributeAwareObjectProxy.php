@@ -2,6 +2,7 @@
 
 namespace Toniette\Proxy;
 
+use BadMethodCallException;
 use ReflectionAttribute;
 use ReflectionClass;
 use ReflectionException;
@@ -227,5 +228,10 @@ class AttributeAwareObjectProxy
 
         $decorators = $this->getDecorators(...$attributes);
         return $this->applyDecorators($subject, ...$decorators);
+    }
+
+    public static function __callStatic(string $name, array $arguments)
+    {
+        throw new BadMethodCallException('Static method calls are not supported on Proxy. Use an instance instead.');
     }
 }
