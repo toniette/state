@@ -11,6 +11,12 @@ final class StatefulFactory
 {
     private function __construct() {}
 
+    /**
+     * @template T of object
+     * @param class-string<T> $statefulClass
+     * @param mixed ...$args
+     * @return object&T
+     */
     public static function create(string $statefulClass, mixed ...$args): object
     {
         $reflection = new ReflectionClass($statefulClass);

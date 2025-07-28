@@ -5,7 +5,6 @@ use Toniette\StateMachine\Transaction;
 
 require __DIR__ . '/vendor/autoload.php';
 
-/** @var Transaction $transaction */
 $transaction = StatefulFactory::create(
     Transaction::class,
     id: '12345',
