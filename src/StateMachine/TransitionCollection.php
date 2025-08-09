@@ -5,7 +5,7 @@ namespace Toniette\StateMachine;
 use Attribute;
 use Toniette\Collection;
 
-#[Attribute(Attribute::TARGET_ALL)]
+#[Attribute(Attribute::TARGET_CLASS_CONSTANT)]
 class TransitionCollection extends Collection
 {
     protected ?string $type = Transition::class;
