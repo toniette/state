@@ -2,8 +2,10 @@
 
 namespace Toniette\StateMachine;
 
+use Attribute;
 use Toniette\Collection;
 
+#[Attribute(Attribute::TARGET_ALL)]
 class TransitionCollection extends Collection
 {
     protected ?string $type = Transition::class;

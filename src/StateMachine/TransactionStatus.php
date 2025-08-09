@@ -14,13 +14,40 @@ namespace Toniette\StateMachine;
 enum TransactionStatus: string implements State
 {
     // Transaction status
+    #[TransitionCollection(
+        new Transition(self::SEND_TO_ANALYSIS, self::IN_ANALYSIS)
+    )]
     case PENDING = 'pending';
+
+    #[TransitionCollection(
+        new Transition(self::APPROVE, self::APPROVED),
+        new Transition(self::REJECT, self::REJECTED)
+    )]
     case IN_ANALYSIS = 'in_analysis';
+
+    #[TransitionCollection(
+        new Transition(self::COMPLETE, self::COMPLETED),
+        new Transition(self::FAIL, self::FAILED)
+    )]
     case PROCESSING = 'processing';
+
+    #[TransitionCollection(
+        new Transition(self::PROCESS, self::PROCESSING)
+    )]
     case APPROVED = 'approved';
+
+    #[TransitionCollection(
+        new Transition(self::CANCEL, self::CANCELED),
+        new Transition(self::SEND_TO_ANALYSIS, self::IN_ANALYSIS)
+    )]
     case REJECTED = 'rejected';
-    case COMPLETED = 'completed';
+
+    #[TransitionCollection(
+        new Transition(self::CANCEL, self::CANCELED),
+        new Transition(self::SEND_TO_ANALYSIS, self::IN_ANALYSIS)
+    )]
     case FAILED = 'failed';
+    case COMPLETED = 'completed';
     case CANCELED = 'canceled';
 
     // Transition names
@@ -31,29 +58,4 @@ enum TransactionStatus: string implements State
     private const string COMPLETE = 'complete';
     private const string FAIL = 'fail';
     private const string CANCEL = 'cancel';
-
-    public function allowedTransitions(): TransitionCollection
-    {
-        return match ($this) {
-            self::PENDING => TransitionCollection::from(
-                new Transition(self::SEND_TO_ANALYSIS, self::IN_ANALYSIS)
-            ),
-            self::IN_ANALYSIS => TransitionCollection::from(
-                new Transition(self::APPROVE, self::APPROVED),
-                new Transition(self::REJECT, self::REJECTED)
-            ),
-            self::REJECTED, self::FAILED => TransitionCollection::from(
-                new Transition(self::CANCEL, self::CANCELED),
-                new Transition(self::SEND_TO_ANALYSIS, self::IN_ANALYSIS)
-            ),
-            self::APPROVED => TransitionCollection::from(
-                new Transition(self::PROCESS, self::PROCESSING)
-            ),
-            self::PROCESSING => TransitionCollection::from(
-                new Transition(self::COMPLETE, self::COMPLETED),
-                new Transition(self::FAIL, self::FAILED)
-            ),
-            default => TransitionCollection::from()
-        };
-    }
 }

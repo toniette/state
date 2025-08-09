@@ -5,6 +5,8 @@ namespace Toniette\StateMachine;
 use BadMethodCallException;
 use Exception;
 use ReflectionClass;
+use ReflectionEnum;
+use ReflectionException;
 use ReflectionProperty;
 
 trait Stateful
@@ -24,6 +26,9 @@ trait Stateful
         throw new Exception("Property $name is not a accessible.");
     }
 
+    /**
+     * @throws ReflectionException
+     */
     final public function __call(string $name, array $arguments): State
     {
         $reflection = new ReflectionClass($this);
@@ -40,7 +45,23 @@ trait Stateful
         foreach (static::$stateProperties as $property) {
             $state = $this->{$property->getName()};
 
-            $transition = $state->allowedTransitions()->getByName($name);
+            $stateClassReflection = new ReflectionEnum($state);
+            $stateCase = $stateClassReflection->getCase($state->name);
+            $stateAttributes = $stateCase->getAttributes(TransitionCollection::class);
+
+            if (empty($stateAttributes)) {
+                continue;
+            }
+
+            if (count($stateAttributes) > 1) {
+                throw new BadMethodCallException(
+                    "Multiple TransitionCollection attributes found in " . static::class
+                );
+            }
+
+            /** @var TransitionCollection $allowedTransitions */
+            $allowedTransitions = reset($stateAttributes)->newInstance();
+            $transition = $allowedTransitions->getByName($name);
             if ($transition === null) {
                 continue;
             }
