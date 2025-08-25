@@ -166,12 +166,13 @@ class AttributeAwareObjectProxy
 
         $this->applyBeforeInterceptors(...$interceptors);
 
-        $subject = $this->target->{$name}(...$arguments);
+        $decorators = $this->getDecorators(...$method->getAttributes());
+
+        $subject = $this->applyDecorators($this->target->{$name}(...$arguments), ...$decorators);
 
         $this->applyAfterInterceptors(...$interceptors);
 
-        $decorators = $this->getDecorators(...$method->getAttributes());
-        return $this->applyDecorators($subject, ...$decorators);
+        return $subject;
     }
 
     /**
@@ -185,12 +186,13 @@ class AttributeAwareObjectProxy
 
         $this->applyBeforeInterceptors(...$interceptors);
 
-        $subject = $this->target->{$name};
+        $accessors = $this->getAccessors(...$property->getAttributes());
+
+        $subject = $this->applyAccessors($this->target->{$name}, ...$accessors);
 
         $this->applyAfterInterceptors(...$interceptors);
 
-        $accessors = $this->getAccessors(...$property->getAttributes());
-        return $this->applyAccessors($subject, ...$accessors);
+        return $subject;
     }
 
     /**

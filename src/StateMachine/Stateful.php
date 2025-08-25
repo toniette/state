@@ -8,6 +8,7 @@ use ReflectionClass;
 use ReflectionEnum;
 use ReflectionException;
 use ReflectionProperty;
+use Toniette\Shared\Handler;
 
 trait Stateful
 {
@@ -82,8 +83,9 @@ trait Stateful
         }
 
         $propertyName = key($availableTransitions);
+        /** @var Transition $transition */
         $transition = reset($availableTransitions);
 
-        return $this->{$propertyName} = $transition->targetState;
+        return Handler::handle($transition, fn () =>  $this->{$propertyName} = $transition->targetState);
     }
 }

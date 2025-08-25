@@ -5,7 +5,7 @@ namespace Toniette\Proxy\Interceptor;
 use Attribute;
 use Toniette\Proxy\Interface\Interceptor;
 
-#[Attribute(Attribute::TARGET_CLASS)]
+#[Attribute(Attribute::TARGET_CLASS | Attribute::IS_REPEATABLE)]
 class ClassInterceptor implements Interceptor
 {
     public function before(): void

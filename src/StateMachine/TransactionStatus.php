@@ -2,6 +2,9 @@
 
 namespace Toniette\StateMachine;
 
+use Toniette\Shared\TransitionDecorator;
+use Toniette\Shared\TransitionInterceptor;
+
 /**
  * @method sendToAnalysis()
  * @method approve()
@@ -51,6 +54,8 @@ enum TransactionStatus: string implements State
     case CANCELED = 'canceled';
 
     // Transition names
+    #[TransitionInterceptor]
+    #[TransitionDecorator]
     private const string SEND_TO_ANALYSIS = 'sendToAnalysis';
     private const string APPROVE = 'approve';
     private const string REJECT = 'reject';
